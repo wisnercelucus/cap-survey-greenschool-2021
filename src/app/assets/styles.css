@@ -1,0 +1,59 @@
+.wrapper{
+    border: 1px solid rgba(180, 180, 180, 0.54);
+    margin: 4rem auto;
+}
+
+.document-title-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+    align-items: center;
+    justify-content: center;
+    color: #66005e;
+}
+
+.document-title{
+    text-align: center;
+    
+}
+
+.project-title{
+    background:  dodgerblue;
+    border-left: .5rem solid #1D1CE5;
+    padding: 1rem;
+}
+
+.title{
+    font-size: 2rem;
+    color: white;
+}
+
+.p-title{
+    font-size: 1.6rem;
+    color: white;
+}
+
+.report-year{
+    font-size: 1rem;
+    font-weight: 550;
+    color: #5f245a;
+    transform: translateY(-1rem);
+}
+
+.logo-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(180, 180, 180, 0.54);
+}
+
+.logo{
+    width: 20%;
+}
+
+.report-date{
+    font-size: 1.3rem;
+}

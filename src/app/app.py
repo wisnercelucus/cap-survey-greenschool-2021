@@ -1,9 +1,15 @@
-from dash import Dash, html, dcc
+from dash import Dash, html
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
-import plotly.express as px
 
-df = px.data.gapminder()
+import pandas as pd
+from utils.functions import *
+from graphs.desc_fig import get_desc_fig_c
+#from graphs.sex import get_sex_graphs
+#from graphs.position import get_position_graphs
+
+dff = pd.read_csv("data/cleaned_data.csv")
+
 
 templates = [
     "bootstrap",
@@ -18,32 +24,14 @@ templates = [
 
 load_figure_template(templates)
 
-figures = [
-    px.scatter(
-        df.query("year==2007"),
-        x="gdpPercap",
-        y="lifeExp",
-        size="pop",
-        color="continent",
-        log_x=True,
-        size_max=60,
-        template=template,
-        title="Gapminder 2007: '%s' theme" % template,
-    )
-    for template in templates
-]
-
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-graphs = [dcc.Graph(figure=fig, className="m-4") for fig in figures]
 core_activities = ['Improve access to water.', 
-'Rehabilitation/construction of sanitary facilities.',
-'Hygiene Promotion in schools. Using the hygiene-friendly schools’ approach.',
+                    'Rehabilitation/construction of sanitary facilities.',
+                    'Hygiene Promotion in schools. Using the hygiene-friendly schools’ approach.',
 ]
 
-
 logos = ['assets/lwf_logo.png', 'assets/dkh_logo.png', 'assets/nca_logo.png',]
-
 
 document_title = html.Div(
     [
@@ -59,6 +47,7 @@ document_title = html.Div(
                 className="document-title"
             ),
                 html.P("Reported on: October 2022", className="text-center report-date"),
+                #html.P("By: Wisner CELUCUS", className="text-center report-date"),
             ]
         )
         ),
@@ -76,7 +65,7 @@ header = html.Div([
             ),
 
             html.P(
-            'Sustainable access to safe drinking water, sanitation, and hygiene for schools in southern Haiti',
+            '"Sustainable access to safe drinking water, sanitation, and hygiene for schools in southern Haiti"',
             className="p-title"
             ),
 
@@ -134,12 +123,50 @@ report_narrative = html.Div(
 )
 
 
+
+age = dff["Age "]
+
+desc_list = [{"value": int(age.mean()), "title": "Mean age", "className": "data-card c_darkblue"},
+            {"value": age.mode(), "title": "Mode age", "className": "data-card c_royalblue"},
+            {"value": age.min(), "title": "Min age", "className": "data-card c_cyan"},
+            {"value": age.max(), "title": "Max age", "className": "data-card c_lightcyan"},
+]
+
+
+findings = html.Div([
+     html.H4("Findings", className="card-title"),
+     html.P("In this section, we present the findings of the surveys using interactive graphs.", className="card-text"),
+     html.Div([
+        html.H4("Description of the respondents", className="heading-tertiary"),
+        html.Div(
+            [
+                html.Div(
+                    [
+                html.Div(
+                        [html.H5(p['title']),
+                            html.Span(p['value'], className="v-num")
+                            ],
+                            className=p["className"]
+                )
+                for p in desc_list
+            ],
+            className="age-detail"),
+            html.Div(
+                get_desc_fig_c(dff),
+                className="graph-group")
+            ],
+        className='desc-row')
+     ])
+    ],
+    className="mt-4"
+)
+
 app.layout = dbc.Container(
     [
         document_title,
         header,
         report_narrative,
-        *graphs
+        findings,
     ]
     ,
     className="p-5 wrapper"

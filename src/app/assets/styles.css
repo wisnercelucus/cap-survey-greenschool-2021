@@ -29,7 +29,8 @@
 }
 
 .p-title{
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    font-style: italic;
     color: white;
 }
 
@@ -56,4 +57,51 @@
 
 .report-date{
     font-size: 1.3rem;
+}
+
+.desc-row{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.age-detail{
+    width: 100%;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.data-card{
+    /*border: 1px solid rgba(180, 180, 180, 0.54);*/
+    box-shadow: 0 0px 2px rgba(0, 0, 0, .54);
+    padding: 2rem;
+    border-radius: 6px;
+    width: 24.5%;
+}
+
+.graph-group{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.desc-graph-u{
+    width: 50%;
+}
+
+.heading-tertiary{
+    font-size: 1.2rem;
+    color: #66005e;
+}
+
+.v-num{
+    font-size: 2.4rem;
+    font-weight: 600;
 }

@@ -1,4 +1,3 @@
-from pydoc import classname
 from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
